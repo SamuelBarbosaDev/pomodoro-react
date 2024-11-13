@@ -76,8 +76,9 @@ export function PomodoroTimer(props: Props): JSX.Element {
     );
 
     useEffect(() => {
-        if (working) document.body.classList.add('working');
-        if (resting) document.body.classList.remove('working');
+        const main = document.getElementsByTagName('main')[0]
+        if (working) main.classList.add('working');
+        if (resting) main.classList.remove('working');
         if (mainTime > 0) return;
         if (working && cyclesQtdManager.length > 0) {
             configureRest(false);
@@ -105,7 +106,7 @@ export function PomodoroTimer(props: Props): JSX.Element {
 
     return (
         <div className='pomodoro'>
-            <h2>You are: {working ? 'Trabalhando' : 'Descansado'}</h2>
+            <h2>Você está: {working ? 'Trabalhando' : 'Descansado'}</h2>
             <Timer mainTime={mainTime} />
 
             <div className="controls">
@@ -121,6 +122,7 @@ export function PomodoroTimer(props: Props): JSX.Element {
                     text={timeCounting ? 'Pause' : 'Play'}
                     onClick={() => setTimeCounting(!timeCounting)}
                     className={!working && !resting ? 'hidden' : ''}
+
                 ></Button>
             </div>
             <div className='details'>
